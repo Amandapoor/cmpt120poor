@@ -1,3 +1,3 @@
-# cmpt120poor
-# Intro to Programming
-# JA: This is not the message from the lab exercise
+Introduction to Programming – Lab Activities 
+============================================
+This repository contains my work for all Lab activities.
