@@ -33,7 +33,7 @@ def getPasswordstrength(password, uname):
     
 def getPassword(uname):
     password = input("Create a new password: ")
-    getPasswordstrength(password, uname)
+    getPasswordstrength(password, uname) # This should be in a while loop
     
 
 def main():
