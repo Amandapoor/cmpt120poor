@@ -6,6 +6,7 @@
 def getEquation():
     return input("Enter an equation(use spaces in between): ").split()
     
+<<<<<<< HEAD
 def calculate(equation):
           
     i = 0                
@@ -23,6 +24,12 @@ def calculate(equation):
         else:
             i = i + 1
     return float(equation [0])
+=======
+def getPassword(uname):
+    password = input("Create a new password: ")
+    getPasswordstrength(password, uname) # This should be in a while loop
+    
+>>>>>>> 689f56e53cc8f795c3d6822ac765978208562d39
 
 
 def hasProductDivision(equation):
