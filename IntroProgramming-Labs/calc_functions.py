@@ -7,13 +7,15 @@ def getEquation(equation):
     while len(equation) > i and hasProductDivision(equation):
         if equation[i] == '*' or equation[i] == '/':
             equation = process(equation, i)
-        i=i+1
+        else:
+            i=i+1
         
     i = 0
     while len(equation) > i and hasAdditionSubtract(equation):
         if equation[i] == '+' or equation[i] == '-':
             equation = process (equation, i)
-        i=i+1
+        else:
+            i=i+1
 
     return float(equation [0])
 
@@ -34,6 +36,18 @@ def hasAdditionSubtract(equation):
     else:
         return False
     
+def multiply(x,y):
+    return float(x) * float(y)
+
+def divide(x,y):
+    return float(x) / float(y)
+
+def add(x,y):
+    return float(x) + float(y)
+
+def subtract(x,y):
+    return float(x) - float(y)
+
 def process(equation, i):
     if equation[i] == '*':
         result = multiply(equation [i-1], equation [i+1])
