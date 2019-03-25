@@ -2,6 +2,19 @@
 #Amanda Poor
 #Intro Programming
 
+
+def add(num1, num2):
+    return float(num1) + float(num2)
+
+def subtract(num1, num2):
+    return float(num1) - float(num2)
+
+def multiply(num1, num2):
+    return float(num1) * float(num2)
+
+def divide(num1, num2):
+    return float(num1) / float(num2)
+
 def getEquation(equation):
     i = 0                
     while len(equation) > i and hasProductDivision(equation):
