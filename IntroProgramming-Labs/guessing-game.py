@@ -11,18 +11,26 @@ def main():
     animal = "elephant"
 
     while True:
-        guess = input("Please guess the animal (enter in lowercase) : ")
+        guess = input("Please guess the animal (enter in lowercase) : ").lower()
+      
 
+        
         if animal == guess:
             print("Congrats")
             break
+        
+        elif guess == "quit":
+           
+            exit()
 
-        else:
+        else: 
             print("Please guess again")
 
-        
-        
-    
+       
+            
+       
+                
+   
    
 main()
     
