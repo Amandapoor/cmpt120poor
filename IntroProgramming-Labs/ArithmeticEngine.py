@@ -13,6 +13,7 @@ def showIntro():
 def showOutro():
     print("\nThank you for using the Arithmetic Engine...")
     print("\nPlease come back again soon!")
+    
 def doLoop():
     while True:
         cmd = input("What computation do you want to perform? ").lower()
@@ -36,10 +37,9 @@ def doLoop():
                 result = num1 // num2
 
             print("The result is " + str(result) + ".\n")
-            break
-
-             
             
+
+           
         elif cmd == 'quit':
             exit()
             
@@ -47,7 +47,6 @@ def doLoop():
             print("Please enter a valid command")
                     
        
-
         if cmd == "add":
             result = num1 + num2
         elif cmd == "sub":
@@ -57,8 +56,7 @@ def doLoop():
         elif cmd == "div":
             result = num1 // num2
         elif cmd == "quit":
-            break
-        
+            break   
        
 def main():
        showIntro()
