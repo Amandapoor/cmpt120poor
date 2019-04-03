@@ -18,8 +18,8 @@ def doLoop():
     while True:
         cmd = input("What computation do you want to perform? ").lower()
         if cmd in ['add', 'mult', 'sub', 'div']:
-            num1 = int(input("Enter the first number: "))
-            num2 = int(input("Enter the second number: "))
+            num1 = float(input("Enter the first number: "))
+            num2 = float(input("Enter the second number: "))
 
             if cmd == "add":
                 result = num1 + num2
@@ -34,8 +34,15 @@ def doLoop():
                 
 
             elif cmd == "div":
-                result = num1 // num2
-
+               
+                
+                try:
+                    result = num1 / num2
+                except:
+                    print ("Unable to divide by 0!")
+                    continue
+                
+                
             print("The result is " + str(result) + ".\n")
             
 
@@ -45,23 +52,12 @@ def doLoop():
             
         else:
             print("Please enter a valid command")
-                    
-       
-        if cmd == "add":
-            result = num1 + num2
-        elif cmd == "sub":
-            result = num1 - num2
-        elif cmd == "mult":
-            result = num1 * num2
-        elif cmd == "div":
-            result = num1 // num2
-        elif cmd == "quit":
-            break   
+                
+      
        
 def main():
        showIntro()
        doLoop()
-     
        showOutro()
     
 main()
