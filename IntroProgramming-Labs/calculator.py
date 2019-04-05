@@ -14,19 +14,19 @@ displayEquation=[]
 displayString=""
 
 def getCoords(i):
-    coords = [[75,120],[165,120],[255,120],[345,120],[75,220],[165,220],[255,220],[345,220],[75,320],[165,320],[255,320],[345,320], [75,420],[165,420],[255,420],[345,420],[255,520],[345,520]]
+    coords = [[75,120],[165,120],[255,120],[345,120],[75,220],[165,220],[255,220],[345,220],[75,320],[165,320],[255,320],[345,320], [75,420],[165,420],[255,420],[345,420],[255,520],[345,520], [75,520]]
     return coords[i][0], coords[i][1]
 
 def getLabel(i):
-    labels = ['7','8','9','/','4','5','6','*','1','2','3','+','+/-','0','.','-','Del','=']
+    labels = ['7','8','9','/','4','5','6','*','1','2','3','+','+/-','0','.','-','Del','=','Clr']
     return labels[i]
 
 def createButtons(win):
     color = ['pink','pink','pink','lightblue','pink','pink','pink','lightblue','pink',
-             'pink','pink','lightblue','lightblue','pink','lightblue','lightblue','lightblue','lightblue']
-    size = [80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80]
+             'pink','pink','lightblue','lightblue','pink','lightblue','lightblue','lightblue','lightblue', 'yellow']
+    size = [80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80]
 
-    for i in range(18):
+    for i in range(19):
         x, y = getCoords(i)
         
         button = Rectangle(Point(x,y),Point(x+size[i],y+size[i]))
@@ -44,7 +44,7 @@ def createDisplay(win):
     return text
     
 def getInput(mouse,display):
-    for i in range(18):
+    for i in range(19):
         x,y = getCoords(i)
         if x<mouse.x < x+80 and y< mouse.y < y+80:
             print(getLabel(i))
@@ -76,8 +76,11 @@ def main():
         label = getInput(mouse, display)
         if label == "=":
             print(equation)
-            result=getEquation(equationString(equation).split())
-            display.setText(str(result))
+            if len(equation)>0:
+                result=getEquation(equationString(equation).split())
+                display.setText(str(result))
+            else:
+                continue
         elif label == "Del":
             if len(equation)==0:
                 continue
@@ -85,19 +88,14 @@ def main():
                 del equation[len(equation)-1]
             print(equation)
             display.setText(equationString(equation))
+        elif label == "Clr":
+            equation=[]
+            display.setText(equationString(equation))
+        elif label == None:
+            continue
         else:
             equation.append(label)
             display.setText(equationString(equation))
-            
-    '''while True:
-        mouse = win.getMouse()
-        label = getInput(mouse, display)
-        if label == "=":
-            result = getEquation(equation.split())
-            display.setText(str(result))
-            
-        else:
-            equation = addEquation(equation, label)'''
 
 
 main()
