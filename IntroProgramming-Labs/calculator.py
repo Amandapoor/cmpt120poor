@@ -10,7 +10,8 @@ def createCanvas():
     win.setBackground("grey")
     return win
 
-
+displayEquation=[]
+displayString=""
 
 def getCoords(i):
     coords = [[75,120],[165,120],[255,120],[345,120],[75,220],[165,220],[255,220],[345,220],[75,320],[165,320],[255,320],[345,320], [75,420],[165,420],[255,420],[345,420],[255,520],[345,520]]
@@ -47,7 +48,6 @@ def getInput(mouse,display):
         x,y = getCoords(i)
         if x<mouse.x < x+80 and y< mouse.y < y+80:
             print(getLabel(i))
-            display.setText(display.getText() + " " + getLabel(i))
             return getLabel(i)
             break
 
@@ -58,22 +58,46 @@ def addEquation(equation,label):
         return equation + label
 
 
-
+def equationString(equation):
+    equationString=""
+    for i in range(len(equation)):
+        equationString+=equation[i]
+        equationString+=" "
+    return equationString
 
     
 def main():
     win = createCanvas()
     display = createDisplay(win)
-    equation = ""
+    equation = []
     coords = createButtons(win)
     while True:
         mouse = win.getMouse()
         label = getInput(mouse, display)
         if label == "=":
+            print(equation)
+            result=getEquation(equationString(equation).split())
+            display.setText(str(result))
+        elif label == "Del":
+            if len(equation)==0:
+                continue
+            else:
+                del equation[len(equation)-1]
+            print(equation)
+            display.setText(equationString(equation))
+        else:
+            equation.append(label)
+            display.setText(equationString(equation))
+            
+    '''while True:
+        mouse = win.getMouse()
+        label = getInput(mouse, display)
+        if label == "=":
             result = getEquation(equation.split())
             display.setText(str(result))
+            
         else:
-            equation = addEquation(equation, label)
+            equation = addEquation(equation, label)'''
 
 
 main()
