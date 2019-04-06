@@ -33,9 +33,7 @@ def main():
         else:
             print("Please guess again")
         
-
-
-   
+ 
    
 main()
     
