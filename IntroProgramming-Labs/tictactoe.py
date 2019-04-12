@@ -1,22 +1,21 @@
 # CMPT 120 Intro to Programming
 # Lab #6 – Lists and Error Handling
-# Author: Your Name Here
-# Created: YYYY-MM-DD
+# Author: Amanda Poor
+# Created: 2019-08-04
+
+
 symbol = [ " ", "x", "o" ]
 
 def printRow(row):
 
     output = "|"
+    
     for i in range(3):
+        
         output = output + " " + symbol[row[i]] + " |"
-        #if row[i]==1:
-            #line = line + " x |"
-        #elif row[i]==2:
-            #line = line + " o |"
-        #else:
-            #line = line + "   |"
+        
             
-    print(line)
+    print(output)
    
 
 def printBoard(board):
@@ -32,22 +31,36 @@ def printBoard(board):
     # for each row in the board... # print the row
     # print the next border
     
+player1 == " x "
 
-def markBoard(board, row, col, player):
+def markBoard(board, row, col, player1):
 
     if board[row][col] == 0:
-        board[row][col] = player
+        board[row][col] = " x "
+    
+    else:
+        print("Non empty location. Pick another one.")
+        
+player2 == " o "
+def markBoard(board, row, col, player2):
+
+    if board[row][col] == 0:
+        board[row][col] = " o "
+    
     else:
         print("Non empty location. Pick another one.")
     # check to see whether the desired square is blank # if so, set it to the player number
-    pass
+
 def getPlayerMove():
-    row = int(input("Enter a row for the play (1-3):")
-    col = int(input("Enter a column for the play (1-3):")
-        return (row - 1, col - 1)
     
+    row = int(input("Enter a row for the play (1-3):")) 
+    col = int(input("Enter a column for the play (1-3):"))
+    return (row - 1, col - 1)
+   
     
+
 def hasBlanks(board):
+    
     # for each row in the board...
     # for each square in the row...
     # check whether the square is blank
@@ -60,12 +73,16 @@ def main():
              [0,0,0]]
 
         
-    player = 1
+ 
+
     while hasBlanks(board):
         printBoard(board)
-        row,col = getPlayerMove()
+        row,col = getPlayerMove(player)
         markBoard(board,row,col,player)
-        player = player % 2 + 1 # switch player for next turn
+        
 
+    
+
+   
     
 main()
