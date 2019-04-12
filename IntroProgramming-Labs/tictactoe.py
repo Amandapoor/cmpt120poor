@@ -30,10 +30,10 @@ def players(player1,player2):
     
 
 
-def markBoard(board, row, col, player1, player2):
-    while 
+def markBoard(board, row, col, player):
+    
     if board[row][col] == 0:
-        board[row][col] = " x "
+        board[row][col] = player
     
     else:
         print("Filled location. Pick another one.")
@@ -50,35 +50,27 @@ def getPlayerMove():
     
 
 def hasBlanks(board):
-    while True:
-        
-    # for each row in the board...
-    # for each square in the row...
-    # check whether the square is blank
-    # if so, return True
-    return True # if no square is blank, return False
+    for row in board:
+        for col in row:
+            if col == 0:
+                return True
+
+    return False
 
 def main():
     board = [[0,0,0],
              [0,0,0],
              [0,0,0]]
 
-    players = getPlayerMove()
+    player = 1
     
-
-        
-
-
     while hasBlanks(board):
         printBoard(board)
-        row,col = getPlayerMove(markBoard)
+        row,col = getPlayerMove()
         markBoard(board,row,col,player)
         player = player % 2 + 1
-    
-        
-
+    printBoard(board)
     
 
-   
     
 main()
