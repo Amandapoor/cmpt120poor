@@ -32,15 +32,19 @@ def createButtons(win):
         button = Rectangle(Point(x,y),Point(x+size[i],y+size[i]))
         button.setFill(color[i])
         label = Text(Point(x+size[i]/2,y+size[i]/2),getLabel(i))
+        label.setSize(22)
         button.draw(win)
         label.draw(win)
         
 def createDisplay(win):
+
     rectangle = Rectangle(Point(75,20), Point(425,100)).draw(win)
     color2 = "white"
     rectangle.setFill(color2)
-    text = Text(Point(400,60),"")
+    text = Text(Point(300,60)," ")
+    text.setSize(22)
     text.draw(win)
+
     return text
     
 def getInput(mouse,display):
@@ -52,10 +56,18 @@ def getInput(mouse,display):
             break
 
 def addEquation(equation,label):
-    if label in ['+','-','*','/']:
-        return equation + " " + label + " "
+#    if label in ['+','-','*','/']:
+#        equation.append(label)
+    if len(equation) == 0:
+        if label not in ['+','-','*','/', '+/-']:
+            equation.append(label)
+    elif label in ['+','-','*','/']:
+        equation.append(" " + label + " ")
+    elif label == '+/-':
+        equation[-1] = str(-1 * float(equation[-1]))
     else:
-        return equation + label
+        equation[-1] = equation[-1] + label
+    return equation
 
 
 def equationString(equation):
@@ -94,7 +106,7 @@ def main():
         elif label == None:
             continue
         else:
-            equation.append(label)
+            equation = addEquation(equation, label)
             display.setText(equationString(equation))
 
 
