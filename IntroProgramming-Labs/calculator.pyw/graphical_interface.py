@@ -6,7 +6,7 @@ from calc_functions import *
 
 
 def createCanvas():
-    win = GraphWin("Calculator",600, 620)
+    win = GraphWin("Calculator",350, 450)
     win.setBackground("grey")
     return win
 
@@ -14,10 +14,10 @@ displayEquation=[]
 displayString=""
 
 def getCoords(i):
-    coords = [[75,120],[165,120],[255,120],[345,120],[75,220],[165,220],
-              [255,220],[345,220],[75,320],[165,320],[255,320],[345,320],
-              [75,420],[165,420],[255,420],[345,420],[255,520],[345,520],
-              [75,520],[435,120],[435,220],[435,320],[435,420]]
+    coords = [[30,110],[90,110],[150,110],[210,110],[30,180],[90,180],
+              [150,180],[210,180],[30,250],[90,250],[150,250],[210,250],
+              [30,310],[90,310],[150,310],[210,310],[150,380],[210,380],
+              [30,380],[270,110],[270,180],[270,250],[270,310]]
     return coords[i][0], coords[i][1]
 
 def getLabel(i):
@@ -30,7 +30,7 @@ def createButtons(win):
              'pink','pink','lightblue','lightblue','pink','lightblue'
              ,'lightblue','lightblue','lightblue', 'yellow','lightgreen','lightgreen',
              'lightgreen','lightgreen']
-    size = [80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80]
+    size = [50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]
 
     for i in range(23):
         x, y = getCoords(i)
@@ -38,7 +38,7 @@ def createButtons(win):
         button = Rectangle(Point(x,y),Point(x+size[i],y+size[i]))
         button.setFill(color[i])
         label = Text(Point(x+size[i]/2,y+size[i]/2),getLabel(i))
-        label.setSize(22)
+        label.setSize(18)
         button.draw(win)
         label.draw(win)
 
@@ -46,11 +46,11 @@ def createButtons(win):
         
 def createDisplay(win):
 
-    rectangle = Rectangle(Point(75,20), Point(515,100)).draw(win)
+    rectangle = Rectangle(Point(30,30), Point(310,80)).draw(win)
     color2 = "white"
     rectangle.setFill(color2)
-    text = Text(Point(400,60)," ")
-    text.setSize(22)
+    text = Text(Point(250,50)," ")
+    text.setSize(18)
     text.draw(win)
 
     return text
@@ -58,7 +58,7 @@ def createDisplay(win):
 def getInput(mouse,display):
     for i in range(23):
         x,y = getCoords(i)
-        if x<mouse.x < x+80 and y< mouse.y < y+80:
+        if x<mouse.x < x+50 and y< mouse.y < y+50:
             print(getLabel(i))
             return getLabel(i)
             break
