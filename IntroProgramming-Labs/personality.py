@@ -8,11 +8,11 @@
 #joke(anger,disgust,happiness, happiness,happiness,happines)
 
 
-emotion = []
-emotion == ["anger", "disgust","fear","happiness","sadness","surprise"] 
-currEmotion = emotion[3]
-action == ["reward","punish","threaten", "joke"]
-#emotion = [0,
+
+emotion = ["anger", "disgust","fear","happiness","sadness","surprise"] 
+
+action = ["reward","punish","threaten", "joke"]
+
 
 
 def getInteraction():
@@ -32,33 +32,24 @@ def lookupEmotion(currEmotion, action):
                 
     
 def primaryLoop():
+    currEmotion = 3
     while True:
         action = getInteraction()
         if action == 9:
+            print("Goodbye")
             break
         currEmotion = lookupEmotion(currEmotion, action)
         showEmotion(currEmotion)
         
-def showEmotion(emotion):
-    i = action
-    j = currEmotion
+def showEmotion(currEmotion):
+
     
     response = ["I'm so mad right now! Go away!", "You're annoying me! Please stop.",
                  "You're scaring me!","I'm so happy right now :)",
                  "I just want to cry and be alone","Wow! My day can't get any better!"]
+    print(response[currEmotion])
     
-    if emotionMatrix[i][j] == 0:
-        print (response[0])
-    elif emotionMatrix[i][j] == 1:
-        print (response[1])
-    elif emotionMatrix[i][j] == 2:
-        print (response[2])
-    elif emotionMatrix[i][j] == 3:
-        print (response[3])
-    elif emotionMatrix[i][j] == 4:
-        print (response[4])
-    elif emotionMatrix[i][j] == 5:
-        print (response[5])
+   
                      
                      
 
@@ -69,10 +60,9 @@ def introduction():
     
 def main():
     introduction()
-    getInteraction()
-    lookupEmotion(currEmotion, action)
+    
     primaryLoop()
-    showEmotion(emotion)
+    
 
         
 main()        
