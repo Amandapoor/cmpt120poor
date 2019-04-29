@@ -1,4 +1,20 @@
+class Product:
+    
+    def__init__(self, name, price, quantity):
+        
+        self.name = name
+        self.price = price
+        self.quantity = quantity
 
+    def inStock(self, count):
+        return self.quantity >= count
+
+    def totalCost(self, count):
+        return count*self.price
+
+    def decStock(self, count):
+        self.quantity = self.quantity - count
+products = [Product(
 
 productNames = [ "Ultrasonic range finder"
                 , "Servo motor"
