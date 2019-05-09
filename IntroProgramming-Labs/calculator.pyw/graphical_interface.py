@@ -8,7 +8,7 @@ from calc_functions import *
 
 def main():
     calc = Calculator()
-    cal.__init__
+    calc.__init__
     calc.run()
     
     
@@ -26,7 +26,7 @@ class Calculator:
         #self.keypad.draw(self.canvas)
         #self.engine = CalculatorEngine()
 
-    def createCanvas(self)
+    def createCanvas(self):
         win = GraphWin('calculator', 350, 450)
         win.setBackground('grey')
         return win
@@ -43,7 +43,7 @@ class Calculator:
     def run(self):
         while True:
             Key = self.Keypad.getKeyPressed()
-            result = self.engine.addbuttonsPressed(key)
+            result = self.engine.addbuttonsPressed(Key)
             if result == 'quit':
                 break
             print(Key)
@@ -52,46 +52,61 @@ class Calculator:
 class CalculatorEngine:
     def __init__(self):
         self.memory = Memory()
-	self.equation = " "
-
-    def insertAnswer(Key, equation, last):
-        if Key == 'Del':
-            return self.equation[:len(self.equation)-1]
-        else:
-            if isOperator(Key) and isNumber(last) or isNumber(Key) and isOperator
-                return self.equation + " " + Key
-            else:
-                return self.equation + Key
+        self.equation = ""
+     
 
     def addbuttonsPressed(self, Key):
-        if Key == "=":
-            result = getEquation(self.equation.split())
-            return
-        elif Key == "+/-":
-            print(self.equation.split())
-            result = -result
-            display.setText(str(result))
-            equation = str(result)
-            print (result)
-        elif Key in ['M+', 'M-', 'MR', 'MC']:
-            self.memory.getEquation(self.equation.split())
-            return self.equation
-        elif Key == "CLR"
-            equation = ' '
-            display.setText(equation)
-            return
+        print(self.equation)
+        if Key == "Clr":
+            self.equation = ""
+        elif Key == "Del":
+            temp = self.equation.split()
+            temp[-1] = ""
+            self.equation = ""
+            for i in temp:
+                if i in ['+','-','*','/']:
+                    self.equation += " " + i + " "
+                else:
+                    self.equation += i
+        elif Key == "=":
+            print(self.equation)
+            if len(self.equation)>0:
+                try:
+                    
+                    result=getEquation(self.equation.split())
+                    self.equation = str(result)
+                except:
+                    self.equation = self.equation
+        elif self.equation == "":
+            if Key == 'MR':
+                self.equation += (str(memory))
+            elif Key not in ['+','-','*','/', '+/-']:
+                self.equation += (Key)
+        elif Key in ['+','-','*','/']:
+                self.equation += (" " + Key + " ")
+        elif Key == '+/-':
+            temp = self.equation.split()
+            temp[-1] = str(-1 * float((temp)[-1]))
+            self.equation = ""
+            for i in temp:
+                if i in ['+','-','*','/']:
+                    self.equation += " " + i + " "
+                else:
+                    self.equation += i
+        elif Key == 'MR':
+            if (self.equation.split())[-1] in [' + ',' - ',' * ',' / ']:
+                self.equation +=(str(memory))
         else:
-            equation = insertAnswer(Key, equation, last)
-            last = Key
-            return
+            self.equation +=  Key
+            #self.equation[-1] = self.equation[-1] + Key
+        return str(self.equation)
     
-
 class Keypad:
     def __init__(self, win):
         self.win = win
         #self.keypad.graphics = self.createGraphics()
         self.buttons = self.createButtons()
-    def createButtons(self, win):
+    def createButtons(self):
         coords = [[30,110],[90,110],[150,110],[210,110],[30,180],[90,180],
                   [150,180],[210,180],[30,250],[90,250],[150,250],[210,250],
                   [30,310],[90,310],[150,310],[210,310],[150,380],[210,380],
@@ -110,10 +125,9 @@ class Keypad:
         buttons = []
 
         for i in range(len(labels)):
-            button = Buttons(size[i], labels[i])
+            button = Button(size[i], labels[i], color[i])
             button.setPosition(coords[i][0], coords[i][1])
-            button.setColor(color[i])
-            button.draw(win)
+            button.draw(self.win)
             buttons.append(button)
         return buttons
     
@@ -133,30 +147,31 @@ class Keypad:
 
 
 class Button:
-    def __init__(self, size, label):
+    def __init__(self, size, label, color):
         self.size = size
         self.labelText = label
         self.position = Point(0,0)
-        #self.
+        self.color = color
         p = self.position
-        self.rectangle = Rectangle(p, Point(p.getX()+size[0], p.getY()+size[1]))
+        self.rectangle = Rectangle(p, Point(p.getX()+size, p.getY()+size))
         self.label = Text(Point(p.getX()+size/2, p.getY()+size/2),label)
         self.rectangle.setFill(self.color)
+
     def getLabel(self):
         return self.labelText
+    
     def isClicked(self, point):
-        if self.position.getX()<=point.getX()<=self.position.getX()+self.size)
+        if self.position.getX() <= point.getX() <= self.position.getX()+self.size and self.position.getY() <= point.getY() <= self.position.getY()+self.size:
             return True
         return False
+    
     def setPosition(self,x,y):
         dx = x-self.position.getX()
         dy = y-self.position.getY()
         self.position.move(dx,dy)
         self.rectangle.move(dx,dy)
         self.label.move(dx,dy)
-    def setColor(self,color):
-        self.color = color
-        self.rectangle.setFill(color)
+        
     def draw(self,win):
         self.rectangle.draw(win)
         self.label.draw(win)
