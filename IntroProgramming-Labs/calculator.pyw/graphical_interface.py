@@ -79,23 +79,34 @@ class CalculatorEngine:
                     self.equation = self.equation
         elif self.equation == "":
             if Key == 'MR':
-                self.equation += (str(memory))
+                self.equation += (str(self.memory.getValue()))
             elif Key not in ['+','-','*','/', '+/-']:
                 self.equation += (Key)
         elif Key in ['+','-','*','/']:
                 self.equation += (" " + Key + " ")
         elif Key == '+/-':
-            temp = self.equation.split()
-            temp[-1] = str(-1 * float((temp)[-1]))
-            self.equation = ""
-            for i in temp:
-                if i in ['+','-','*','/']:
-                    self.equation += " " + i + " "
-                else:
-                    self.equation += i
+            try:
+                temp = self.equation.split()
+                temp[-1] = str(-1 * float((temp)[-1]))
+                self.equation = ""
+                for i in temp:
+                    if i in ['+','-','*','/']:
+                        self.equation += " " + i + " "
+                    else:
+                        self.equation += i
+            except:
+                self.equation = self.equation
         elif Key == 'MR':
-            if (self.equation.split())[-1] in [' + ',' - ',' * ',' / ']:
-                self.equation +=(str(memory))
+            if (self.equation.split())[-1] in ['+','-','*','/']:
+                self.equation += str(self.memory.getValue())
+
+        elif Key == 'M+':
+            self.memory.add(getEquation(self.equation.split()))
+        elif Key == 'M-':
+            self.memory.subtract(getEquation(self.equation.split()))
+            
+        elif Key == 'MC':
+            self.memory.clear()
         else:
             self.equation +=  Key
             #self.equation[-1] = self.equation[-1] + Key
@@ -104,7 +115,6 @@ class CalculatorEngine:
 class Keypad:
     def __init__(self, win):
         self.win = win
-        #self.keypad.graphics = self.createGraphics()
         self.buttons = self.createButtons()
     def createButtons(self):
         coords = [[30,110],[90,110],[150,110],[210,110],[30,180],[90,180],
@@ -200,7 +210,7 @@ class Memory:
         self.value += value
     def subtract(self, value):
         self.value -= value
-    def clear(self, value):
+    def clear(self):
         self.value = 0
 
 main()
