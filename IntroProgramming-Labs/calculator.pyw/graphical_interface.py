@@ -32,7 +32,6 @@ class Calculator:
         return win
 
     def createGraphics(self):
-		#same as previous projects return canvas
         rectangle = Rectangle(Point(30,30), Point(310,80)).draw(win)
         color2 = "white"
         rectangle.setFill(color2)
